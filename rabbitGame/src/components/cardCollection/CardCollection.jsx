@@ -1,10 +1,12 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
+import {Card} from "./card/Card.jsx";
 
 export const CardCollection = () => {
     const [card, setCard] = useState()
     const [refresh, setRefresh] = useState(true)
     const [cards, setCards] = useState([])
+    const [openCard, setOpenCard] = useState(false)
     const collectionCard = [
         {value: 1, type: 'go'},
         {value: 2, type: 'go'},
@@ -15,8 +17,9 @@ export const CardCollection = () => {
     useEffect(() => {
         setCards(collectionCard)
     }, [refresh])
-    const onChange = () => {
 
+    const onChange = () => {
+        setOpenCard(prevState => !prevState)
         const openCard = (cards[Math.floor(Math.random() * cards.length)])
         if (openCard) {
 
@@ -34,7 +37,7 @@ export const CardCollection = () => {
     return (
         <div>
             {card && card.value}
-
+            <Card openCard={openCard}/>
             <button onClick={onChange}>1221</button>
         </div>
 
